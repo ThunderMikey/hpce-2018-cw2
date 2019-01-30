@@ -12,6 +12,9 @@ namespace YOUR_LOGIN{
 	std::shared_ptr<fourier_transform> Create_direct_fourier_transform_parfor_inner();
 }
 */
+namespace yc12015{
+	std::shared_ptr<fourier_transform> Create_direct_fourier_transform_parfor_inner();
+}
 
 void fourier_transform::RegisterDefaultFactories()
 {
@@ -22,6 +25,7 @@ void fourier_transform::RegisterDefaultFactories()
 
 	// TODO : Add your factories here
 	// e.g. RegisterTransformFactory("hpce.YOUR_LOGIN.direct_fourier_transform_parfor_inner", hpce::YOUR_LOGIN::Create_direct_fourier_transform_parfor_inner);
+	RegisterTransformFactory("hpce.yc12015.direct_fourier_transform_parfor_inner", hpce::yc12015::Create_direct_fourier_transform_parfor_inner);
 }
 
 }; // namespace hpce
