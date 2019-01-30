@@ -1,0 +1,202 @@
+Cleaning working dir.
+
+This is an informal run of the final assesment. It should be expected that
+the results given will translate directly into your mark, unless:
+
+ - there is any plagiarism
+
+ - any pdfs are not authentic attempts to deliver what was asked for
+   (so this is not about how good the attempt is, but whether it was
+   a good faith effort to deliver it).
+
+ - something was submitted after the deadline in a way that triggers the
+   late delivery policy (though if you clearly completed the work before
+   the deadline, then it shouldn't be a problem.
+
+ - there is a conflict between what is in git and what is in blackboard.
+   this could mean lots of things (usually none of them bad), so requires
+   manual resolution
+
+ - coursework was submitted via an odd route (e.g. it is in blackboard, but not
+   in git, or it came through via email at 21:59, etc.), which requires
+   manual intervention.
+
+ - Some minor mistake made things go wrong (e.g. a typo drops the mark to
+   40% because it doesn't build). Any submissions getting less than 90%
+   are looked at manually, and when appropriate a small intervention
+   made (for a small penalty) in order to get the full mark realised.
+
+All those parts take time, but for 95% of people, you'll be seeing 100%
+here, and that's what you'll get for the grade.
+
+Cloning  :  (cd ./tmp/yc12015/hpce-2018-cw2-yc12015 && git clone git@github.com:HPCE/hpce-2018-cw2-yc12015.git )
+Cloning into 'hpce-2018-cw2-yc12015'...
+./tmp/yc12015/hpce-2018-cw2-yc12015
+aws.md
+bin
+csv_and_pivot.md
+git.md
+images
+include
+jjd06_logs
+makefile
+readme.md
+src
+commit 5757f09fa5f8d1d2dc7a592a82f4a722ff2b68c4
+Author: Mike Chen <mike@tmikey.tech>
+Date:   Wed Jan 30 14:53:05 2019 +0000
+
+    delete TODO in file
+yc12015, 0, Have results/direct_inner_versus_k.pdf, FAIL
+yc12015, 1, Have results/direct_outer_time_versus_p.pdf, FAIL
+yc12015, 2, Have results/direct_outer_strong_scaling.pdf, FAIL
+yc12015, 3, Have results/direct_outer_strong_scaling.pdf, FAIL
+yc12015, 4, Have results/fast_fourier_time_vs_recursion_k.pdf, FAIL
+yc12015, 5, Have results/fast_fourier_recursion_versus_iteration.pdf, FAIL
+yc12015, 6, Have src/yc12015/direct_fourier_transform_parfor_inner.cpp, FAIL
+yc12015, 7, Have src/yc12015/direct_fourier_transform_parfor_outer.cpp, FAIL
+yc12015, 8, Have src/yc12015/fast_fourier_transform_taskgroup.cpp, FAIL
+yc12015, 9, Have src/yc12015/fast_fourier_transform_parfor.cpp, FAIL
+yc12015, 10, Have src/yc12015/fast_fourier_transform_combined.cpp, FAIL
+yc12015, 11, Have src/fourier_transform_register_factories.cpp, PASS
+Makeing : ./tmp/yc12015/working/src in /home/james/Documents/hpce-2018-private/scripts/cw2
+cp ./tmp/yc12015/hpce-2018-cw2-yc12015/src/fourier_transform_register_factories.cpp ./tmp/yc12015/working/src/fourier_transform_register_factories.cpp
+dos2unix: converting file ./tmp/yc12015/working/src/fourier_transform_register_factories.cpp to Unix format ...
+Overwriting files in src directory (except for registry)
+(cd ./tmp/yc12015/working/src && g++ -std=c++14 -O3 -msse4 -g -I ../include direct_fourier_transform.cpp fast_fourier_transform.cpp fourier_transform.cpp fourier_transform_register_factories.cpp yc12015/*.cpp /home/james/Documents/hpce-2018-private/scripts/cw2/scripts/bench_test_fourier_transform.cpp -o ../test_fourier_transform -ltbb) &> ./tmp/yc12015/log/build_test_fourier.log
+yc12015, 12, Can build test_fourier_transform, FAIL
+(cd ./tmp/yc12015/working/src && g++ -std=c++14 -O3 -msse4 -g -I ../include direct_fourier_transform.cpp fast_fourier_transform.cpp fourier_transform.cpp fourier_transform_register_factories.cpp yc12015/*.cpp /home/james/Documents/hpce-2018-private/scripts/cw2/scripts/bench_time_fourier_transform.cpp -o ../time_fourier_transform -ltbb) &> ./tmp/yc12015/log/build_time_fourier.log
+yc12015, 13, Can build time_fourier_transform, FAIL
+(cd $WORKING_DIR && /usr/bin/timeout 60 ./test_fourier_transform 2>&1) | grep hpce.direct_fourier_transform -
+yc12015, 14, Checking test_fourier_transform still lists 'hpce.direct_fourier_transform', FAIL
+(cd $WORKING_DIR && /usr/bin/timeout 60 ./test_fourier_transform 2>&1) | grep hpce.fast_fourier_transform -
+yc12015, 15, Checking test_fourier_transform still lists 'hpce.fast_fourier_transform', FAIL
+(cd $WORKING_DIR && /usr/bin/timeout 60 ./test_fourier_transform 2>&1) | grep hpce.$SL.direct_fourier_transform_parfor_inner -
+yc12015, 16, Checking test_fourier_transform now lists 'hpce.yc12015.direct_fourier_transform_parfor_inner', FAIL
+(cd $WORKING_DIR && /usr/bin/timeout 60 ./test_fourier_transform 2>&1) | grep hpce.$SL.direct_fourier_transform_parfor_outer -
+yc12015, 17, Checking test_fourier_transform now lists 'hpce.yc12015.direct_fourier_transform_parfor_outer', FAIL
+(cd $WORKING_DIR && /usr/bin/timeout 60 ./test_fourier_transform 2>&1) | grep hpce.$SL.fast_fourier_transform_parfor -
+yc12015, 18, Checking test_fourier_transform now lists 'hpce.yc12015.fast_fourier_transform_parfor', FAIL
+(cd $WORKING_DIR && /usr/bin/timeout 60 ./test_fourier_transform 2>&1) | grep hpce.$SL.fast_fourier_transform_taskgroup -
+yc12015, 19, Checking test_fourier_transform now lists 'hpce.yc12015.fast_fourier_transform_taskgroup', FAIL
+(cd $WORKING_DIR && /usr/bin/timeout 60 ./test_fourier_transform 2>&1) | grep hpce.$SL.fast_fourier_transform_combined -
+yc12015, 20, Checking test_fourier_transform now lists 'hpce.yc12015.fast_fourier_transform_combined', FAIL
+(cd $WORKING_DIR/src && g++ -std=c++14 -E -I ../include $SL/direct_fourier_transform_parfor_inner.cpp -o -) \ | $SCRIPTS_DIR/extract_preprocessed_part.pl $SL/direct_fourier_transform_parfor_inner.cpp \ | grep parallel_for -
+g++: error: yc12015/direct_fourier_transform_parfor_inner.cpp: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+yc12015, 21, Checking direct_fourier_transform_parfor_inner.cpp calls parallel_for at some point., FAIL
+(cd $WORKING_DIR/src && g++ -std=c++14 -E -I ../include $SL/direct_fourier_transform_parfor_inner.cpp -o -) \ | $SCRIPTS_DIR/extract_preprocessed_part.pl $SL/direct_fourier_transform_parfor_inner.cpp \ | grep partitioner -
+g++: error: yc12015/direct_fourier_transform_parfor_inner.cpp: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+yc12015, 22, Checking direct_fourier_transform_parfor_inner.cpp uses partitioner., FAIL
+(cd $WORKING_DIR/src && g++ -std=c++14 -E -I ../include $SL/direct_fourier_transform_parfor_outer.cpp -o -) \ | $SCRIPTS_DIR/extract_preprocessed_part.pl $SL/direct_fourier_transform_parfor_outer.cpp \ | grep parallel_for -
+g++: error: yc12015/direct_fourier_transform_parfor_outer.cpp: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+yc12015, 23, Checking direct_fourier_transform_parfor_outer.cpp calls parallel_for at some point., FAIL
+(cd $WORKING_DIR/src && g++ -std=c++14 -E -I ../include $SL/fast_fourier_transform_taskgroup.cpp -o -) \ | $SCRIPTS_DIR/extract_preprocessed_part.pl $SL/fast_fourier_transform_taskgroup.cpp \ | grep task_group -
+g++: error: yc12015/fast_fourier_transform_taskgroup.cpp: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+yc12015, 24, Checking fast_fourier_transform_taskgroup.cpp uses task groups at some point., FAIL
+(cd $WORKING_DIR/src && g++ -std=c++14 -E -I ../include $SL/fast_fourier_transform_parfor.cpp -o -) \ | $SCRIPTS_DIR/extract_preprocessed_part.pl $SL/fast_fourier_transform_parfor.cpp \ | grep parallel_for -
+g++: error: yc12015/fast_fourier_transform_parfor.cpp: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+yc12015, 25, Checking fast_fourier_transform_parfor.cpp uses parallel_for at some point., FAIL
+(cd $WORKING_DIR/src && g++ -std=c++14 -E -I ../include $SL/fast_fourier_transform_combined.cpp -o -) \ | $SCRIPTS_DIR/extract_preprocessed_part.pl $SL/fast_fourier_transform_combined.cpp \ | grep parallel_for -
+g++: error: yc12015/fast_fourier_transform_combined.cpp: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+yc12015, 26, Checking fast_fourier_transform_combined.cpp uses parallel_for., FAIL
+(cd $WORKING_DIR/src && g++ -std=c++14 -E -I ../include $SL/fast_fourier_transform_combined.cpp -o -) \ | $SCRIPTS_DIR/extract_preprocessed_part.pl $SL/fast_fourier_transform_combined.cpp \ | grep task_group -
+g++: error: yc12015/fast_fourier_transform_combined.cpp: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+yc12015, 27, Checking fast_fourier_transform_combined.cpp also uses task_group., FAIL
+[[ -f $WORKING_DIR/test_fourier_transform ]] && ( /usr/bin/timeout -k ${MAXLIMIT} ${TIMELIMIT} $WORKING_DIR/test_fourier_transform hpce.$SL.direct_fourier_transform_parfor_inner ) 2>&1 | ${LOG_THROTTLE} > $LOG_DIR/test_direct_fourier_transform_parfor_inner.log
+yc12015, 28, Testing direct_fourier_transform_parfor_inner (using external tester), every test should pass., FAIL
+[[ -f $WORKING_DIR/test_fourier_transform ]] && ( /usr/bin/timeout -k ${MAXLIMIT} ${TIMELIMIT} $WORKING_DIR/test_fourier_transform hpce.$SL.direct_fourier_transform_parfor_outer ) 2>&1 | ${LOG_THROTTLE} > $LOG_DIR/test_direct_fourier_transform_parfor_outer.log
+yc12015, 29, Testing direct_fourier_transform_parfor_outer (using external tester), every test should pass., FAIL
+[[ -f $WORKING_DIR/test_fourier_transform ]] && ( /usr/bin/timeout -k ${MAXLIMIT} ${TIMELIMIT} $WORKING_DIR/test_fourier_transform hpce.$SL.fast_fourier_transform_taskgroup ) 2>&1 | ${LOG_THROTTLE} > $LOG_DIR/test_fast_fourier_transform_taskgroup.log
+yc12015, 30, Testing fast_fourier_transform_taskgroup (using external tester), every test should pass., FAIL
+[[ -f $WORKING_DIR/test_fourier_transform ]] && ( /usr/bin/timeout -k ${MAXLIMIT} ${TIMELIMIT} $WORKING_DIR/test_fourier_transform hpce.$SL.fast_fourier_transform_parfor ) 2>&1 | ${LOG_THROTTLE} > $LOG_DIR/test_fast_fourier_transform_parfor.log
+yc12015, 31, Testing fast_fourier_transform_parfor (using external tester), every test should pass., FAIL
+[[ -f $WORKING_DIR/test_fourier_transform ]] && ( /usr/bin/timeout -k ${MAXLIMIT} ${TIMELIMIT} $WORKING_DIR/test_fourier_transform hpce.$SL.fast_fourier_transform_combined ) 2>&1 | ${LOG_THROTTLE} > $LOG_DIR/test_fast_fourier_transform_combined.log
+yc12015, 32, Testing fast_fourier_transform_combined (using external tester), every test should pass., FAIL
+
+Command to check for parallelism:
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.yc12015.fast_fourier_transform_taskgroup 4 20
+/usr/bin/timeout: failed to run command ‘./tmp/yc12015/working/time_fourier_transform’: No such file or directory
+Output = 
+echo parallelism = X NoOutput X
+
+ Checking condition : NoOutput > 2.5
+(standard_in) 1: illegal character: N
+(standard_in) 1: illegal character: O
+(standard_in) 1: syntax error
+yc12015, 33, Timing hpce.yc12015.fast_fourier_transform_taskgroup with 4 CPUs and n=2^20: check observed parallelism (totalTime/wallTime) of NoOutput is more than 2.5., FAIL
+
+Command to check for parallelism:
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.yc12015.fast_fourier_transform_parfor 4 24
+/usr/bin/timeout: failed to run command ‘./tmp/yc12015/working/time_fourier_transform’: No such file or directory
+Output = 
+echo parallelism = X NoOutput X
+
+ Checking condition : NoOutput > 1.1
+(standard_in) 1: illegal character: N
+(standard_in) 1: illegal character: O
+(standard_in) 1: syntax error
+yc12015, 34, Timing hpce.yc12015.fast_fourier_transform_parfor with 4 CPUs and n=2^24: check observed parallelism (totalTime/wallTime) of NoOutput is more than 1.1., FAIL
+
+Command to check for parallelism:
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.yc12015.fast_fourier_transform_combined 4 20
+/usr/bin/timeout: failed to run command ‘./tmp/yc12015/working/time_fourier_transform’: No such file or directory
+Output = 
+echo parallelism = NoOutput
+
+ Checking condition : NoOutput > 2.5
+(standard_in) 1: illegal character: N
+(standard_in) 1: illegal character: O
+(standard_in) 1: syntax error
+yc12015, 35, Timing hpce.yc12015.fast_fourier_transform_combined with 4 CPUs and n=2^20: check observed parallelism (totalTime/wallTime) of NoOutput is more than 2.5., FAIL
+
+Command timing :
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.direct_fourier_transform 4 12 
+
+Command timing :
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.yc12015.direct_fourier_transform_parfor_inner 4 12
+true
+
+ Checking condition : CommandFailed > CommandFailed
+(standard_in) 1: syntax error
+(standard_in) 1: syntax error
+yc12015, 36, For 4 CPUs, n=2^12, direct: check time for serial (CommandFailed) is greater than parfor (CommandFailed)., FAIL
+
+Command timing :
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.fast_fourier_transform 4 22
+
+Command timing :
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.yc12015.fast_fourier_transform_parfor 4 22
+
+Command timing :
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.yc12015.fast_fourier_transform_taskgroup 4 22 
+
+Command timing :
+/usr/bin/timeout -k 70 60 ./tmp/yc12015/working/time_fourier_transform hpce.yc12015.fast_fourier_transform_combined 4 22
+true
+
+ Checking condition : CommandFailed > 2 * CommandFailed
+(standard_in) 1: syntax error
+(standard_in) 1: syntax error
+yc12015, 37, For 4 CPUs, n=2^22, fast: check time for serial (CommandFailed) is at least 2x that of taskgroup (CommandFailed)., FAIL
+true
+
+ Checking condition : 2 * CommandFailed > 3 * CommandFailed
+(standard_in) 1: syntax error
+(standard_in) 1: syntax error
+yc12015, 38, For 4 CPUs, n=2^22, fast: check time for parfor (CommandFailed) is at least 1.5x that of combined (CommandFailed)., FAIL
+
+Passed 1 out of 39 tests.
