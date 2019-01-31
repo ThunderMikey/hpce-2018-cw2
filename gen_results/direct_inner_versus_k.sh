@@ -1,16 +1,17 @@
 #!/bin/bash
 # this script should be run in repo root
 
-mkdir -p results
-
+WORK_DIR="data"
 TEST_NAME="direct_inner_versus_k"
 # seconds is enough for n=4096 on intel core 6700hq
-T_LIMIT=3
+T_LIMIT=10
 
 # [1,16]
 KS=$(seq 1 16)
 
 CSV_HEAD="K, name, allowedP, trueP, n, [sentinel], time"
+
+mkdir -p $WORK_DIR
 
 # add K to each row
 function add_k()
@@ -23,7 +24,7 @@ function add_k()
 function run_tests()
 {
 for k in $KS; do
-  R_FILE="results/${TEST_NAME}_$k.csv"
+  R_FILE="$WORK_DIR/${TEST_NAME}_$k.csv"
   echo $CSV_HEAD > $R_FILE
   HPCE_DIRECT_INNER_K=$k \
     bin/time_fourier_transform \
@@ -33,17 +34,17 @@ for k in $KS; do
 done
 }
 
-function cat_results()
+function gather_results()
 {
-  SUM_FILE="results/${TEST_NAME}.csv"
+  SUM_FILE="$WORK_DIR/${TEST_NAME}.csv"
   echo $CSV_HEAD > $SUM_FILE
   for k in $KS; do
-    R_FILE="results/${TEST_NAME}_$k.csv"
+    R_FILE="$WORK_DIR/${TEST_NAME}_$k.csv"
     sed -n "1!p" $R_FILE >> $SUM_FILE
   done
 }
 
 run_tests
 
-cat_results
+gather_results
 
