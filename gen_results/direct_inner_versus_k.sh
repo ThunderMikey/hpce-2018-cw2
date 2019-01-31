@@ -21,6 +21,12 @@ function add_k()
   sed -i -e "1 ! {s/^/$2, /}" $1
 }
 
+function delete_comment()
+{
+  # $1 file
+  sed -i '/^#/d' $1
+}
+
 function run_tests()
 {
 for k in $KS; do
@@ -30,6 +36,7 @@ for k in $KS; do
     bin/time_fourier_transform \
     hpce.yc12015.direct_fourier_transform_parfor_inner 0 $T_LIMIT \
     >> $R_FILE
+  delete_comment $R_FILE
   add_k $R_FILE $k
 done
 }
