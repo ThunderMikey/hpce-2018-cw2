@@ -33,3 +33,11 @@ bin/time_fourier_transform : src/time_fourier_transform.cpp $(FOURIER_OBJS)
 	$(CXX) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
 all : bin/test_fourier_transform bin/time_fourier_transform
+
+yc12015.zip:
+	zip --recurse-paths $@ ./ \
+		--exclude \*bin\* \
+			tags \
+			/*.swp \
+			/*.o \
+			\*data\*
