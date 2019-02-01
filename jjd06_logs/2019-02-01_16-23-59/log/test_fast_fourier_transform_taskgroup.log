@@ -1,0 +1,2 @@
+Using chunk size: 16
+hpce.fast_fourier_transform_taskgroup : Passed 67530421 out of 67530421 tests.
