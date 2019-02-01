@@ -19,7 +19,8 @@ FOURIER_IMPLEMENTATION_OBJS =  \
 	src/yc12015/direct_fourier_transform_parfor_inner.o \
 	src/yc12015/direct_fourier_transform_parfor_outer.o \
 	src/yc12015/fast_fourier_transform_taskgroup.o \
-	src/yc12015/fast_fourier_transform_parfor.o
+	src/yc12015/fast_fourier_transform_parfor.o \
+	src/yc12015/fast_fourier_transform_combined.o
 
 FOURIER_OBJS = $(FOURIER_CORE_OBJS) $(FOURIER_IMPLEMENTATION_OBJS)
 

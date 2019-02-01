@@ -16,6 +16,7 @@ namespace yc12015{
 	std::shared_ptr<fourier_transform> Create_direct_fourier_transform_parfor_outer();
 	std::shared_ptr<fourier_transform> Create_fast_fourier_transform_taskgroup();
 	std::shared_ptr<fourier_transform> Create_fast_fourier_transform_parfor();
+	std::shared_ptr<fourier_transform> Create_fast_fourier_transform_combined();
 }
 
 void fourier_transform::RegisterDefaultFactories()
@@ -30,6 +31,7 @@ void fourier_transform::RegisterDefaultFactories()
 	RegisterTransformFactory("hpce.yc12015.direct_fourier_transform_parfor_outer", hpce::yc12015::Create_direct_fourier_transform_parfor_outer);
 	RegisterTransformFactory("hpce.yc12015.fast_fourier_transform_taskgroup", hpce::yc12015::Create_fast_fourier_transform_taskgroup);
 	RegisterTransformFactory("hpce.yc12015.fast_fourier_transform_parfor", hpce::yc12015::Create_fast_fourier_transform_parfor);
+	RegisterTransformFactory("hpce.yc12015.fast_fourier_transform_combined", hpce::yc12015::Create_fast_fourier_transform_combined);
 }
 
 }; // namespace hpce
