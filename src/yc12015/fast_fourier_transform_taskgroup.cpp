@@ -3,6 +3,9 @@
 #include <cmath>
 #include <cassert>
 #include "tbb/task_group.h"
+// getenv usage
+#include <cstdlib>
+#include <iostream>
 
 namespace hpce
 {
@@ -13,6 +16,7 @@ class fast_fourier_transform_taskgroup
 	: public fourier_transform
 {
 protected:
+  unsigned chunk_size;
 	/* Standard radix-2 FFT only supports binary power lengths */
 	virtual size_t calc_padded_size(size_t n) const
 	{
@@ -42,20 +46,24 @@ protected:
 		}else{
 			size_t m = n/2;
 
-      tbb::task_group t_group;
-
-      t_group.run(
-          [&](){
+      auto rl = [&](){
             recurse(m,wn*wn,pIn,2*sIn,pOut,sOut);
-          }
-          );
-      t_group.run(
-          [&](){
+          };
+      auto rr = [&](){
             recurse(m,wn*wn,pIn+sIn,2*sIn,pOut+sOut*m,sOut);
-          }
-          );
+          };
+      if (n > chunk_size){
+        tbb::task_group t_group;
 
-      t_group.wait();
+        t_group.run(rl);
+        t_group.run(rr);
+
+        t_group.wait();
+      }
+      else{
+        rl();
+        rr();
+      }
 			complex_t w=complex_t(1, 0);
 
 			for (size_t j=0;j<m;j++){
@@ -100,6 +108,20 @@ public:
 
 	virtual bool is_quadratic() const
 	{ return false; }
+
+  fast_fourier_transform_taskgroup(){
+    // chunk size for inner loop
+    const char *v = getenv("HPCE_FFT_RECURSION_K");
+    // "wall clock time vs grainsize" 
+    // @ https://www.threadingbuildingblocks.org/docs/help/tbb_userguide/Controlling_Chunking.html
+    if(v != NULL){
+      chunk_size = atoi(v);
+    }
+    else{
+      chunk_size = 16;
+    }
+    std::cerr<<"Using chunk size: "<<chunk_size<<std::endl;
+  }
 };
 
 std::shared_ptr<fourier_transform> Create_fast_fourier_transform_taskgroup()
