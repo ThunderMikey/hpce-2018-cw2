@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <cassert>
+#include "tbb/task_group.h"
 
 namespace hpce
 {
@@ -41,9 +42,20 @@ protected:
 		}else{
 			size_t m = n/2;
 
-			recurse(m,wn*wn,pIn,2*sIn,pOut,sOut);
-			recurse(m,wn*wn,pIn+sIn,2*sIn,pOut+sOut*m,sOut);
+      tbb::task_group t_group;
 
+      t_group.run(
+          [&](){
+            recurse(m,wn*wn,pIn,2*sIn,pOut,sOut);
+          }
+          );
+      t_group.run(
+          [&](){
+            recurse(m,wn*wn,pIn+sIn,2*sIn,pOut+sOut*m,sOut);
+          }
+          );
+
+      t_group.wait();
 			complex_t w=complex_t(1, 0);
 
 			for (size_t j=0;j<m;j++){
